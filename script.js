@@ -1,23 +1,61 @@
-document.getElementById("dataForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+const API_URL = "YOUR_API_GATEWAY_URL";
 
+const $ = (s) => document.querySelector(s);
+
+function setError(id, msg) {
+  $(id).textContent = msg;
+}
+
+function validate() {
+  let ok = true;
+  setError("#nameError", "");
+  setError("#messageError", "");
+
+  if (!$("#name").value.trim()) { setError("#nameError", "Required"); ok = false; }
+  if (!$("#message").value.trim()) { setError("#messageError", "Required"); ok = false; }
+
+  return ok;
+}
+
+function showNotice(type, msg) {
+  const box = $("#notice");
+  box.className = `notice ${type}`;
+  box.textContent = msg;
+  box.style.display = "block";
+}
+
+$("#dataForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  if (!validate()) return;
+
+  $("#submitBtn").disabled = true;
+  $("#submitBtn").textContent = "Submitting…";
+
+  try {
     const payload = {
-        name: document.getElementById("name").value,
-        message: document.getElementById("message").value
+      name: $("#name").value.trim(),
+      message: $("#message").value.trim()
     };
 
-    try {
-        const res = await fetch("YOUR_API_GATEWAY_URL", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        });
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
-        const output = await res.json();
-        document.getElementById("response").innerHTML = "✔ " + output.message;
+    const data = await res.json();
 
-    } catch (err) {
-        document.getElementById("response").innerHTML = "❌ Error sending data!";
-        console.log(err);
+    if (!res.ok) showNotice("error", data.message || "Request failed.");
+    else {
+      showNotice("success", data.message || "Submitted!");
+      $("#dataForm").reset();
     }
+
+  } catch (err) {
+    showNotice("error", "Network error.");
+  }
+
+  $("#submitBtn").disabled = false;
+  $("#submitBtn").textContent = "Submit";
 });
