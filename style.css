@@ -1,42 +1,110 @@
+*, *::before, *::after { box-sizing: border-box; }
+body, html { margin: 0; padding: 0; height: 100%; }
+
+/* --- Professional Background --- */
 body {
-    font-family: Arial, sans-serif;
-    background: #f2f2f2;
+  background: radial-gradient(circle at top, #0f172a 0%, #152242 35%, #020617 100%);
+  font-family: system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.container {
-    width: 400px;
-    margin: 80px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #ccc;
+/* Container */
+.page {
+  width: 100%;
+  max-width: 450px;
+  padding: 24px;
 }
 
-h1 {
-    text-align: center;
+/* Card */
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  padding: 28px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Title alignment FIXED */
+.title {
+  text-align: center;
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.subtitle {
+  text-align: center;
+  margin: 0 0 22px;
+  font-size: 14px;
+  color: #475569;
+}
+
+/* Form */
+form { display: grid; gap: 18px; }
+
+.field { display: grid; gap: 6px; }
+
+label {
+  font-size: 14px;
+  color: #0f172a;
+  font-weight: 500;
 }
 
 input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: 0.2s;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background: #0074D9;
-    color: white;
-    border: none;
-    cursor: pointer;
+input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .2);
 }
 
-button:hover {
-    background: #005BB5;
+/* Button */
+.btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  transition: .2s;
 }
 
-#response {
-    margin-top: 15px;
-    text-align: center;
-    font-weight: bold;
+.btn:hover {
+  background: #1e40af;
 }
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Notice */
+.notice {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  display: none;
+}
+
+.notice.success { display: block; background: #ecfdf5; color: #065f46; border: 1px solid #34d399; }
+.notice.error { display: block; background: #fef2f2; color: #7f1d1d; border: 1px solid #fca5a5; }
+
+/* Errors under input */
+.error {
+  color: #dc2626;
+  font-size: 12px;
+  min-height: 14px;
+}
+
