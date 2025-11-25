@@ -1,28 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Serverless Web App</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Serverless Cloud App</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <div class="container">
-        <h1>AWS Serverless Web Application</h1>
+  <main class="page">
+    <section class="card">
+      <h1 class="title">Serverless Cloud App</h1>
+      <p class="subtitle"></p>
 
-        <form id="dataForm">
-            <label>Name:</label>
-            <input type="text" id="name" required>
+      <form id="dataForm" novalidate>
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input id="name" type="text" placeholder="Enter your name" required />
+          <small class="error" id="nameError"></small>
+        </div>
 
-            <label>Message:</label>
-            <input type="text" id="message" required>
+        <div class="field">
+          <label for="message">Your Message</label>
+          <input id="message" type="text" placeholder="Enter your message" required />
+          <small class="error" id="messageError"></small>
+        </div>
 
-            <button type="submit">Submit</button>
-        </form>
+        <button id="submitBtn" type="submit" class="btn">Submit</button>
+      </form>
 
-        <p id="response"></p>
-    </div>
+      <div id="notice" class="notice"></div>
+    </section>
+  </main>
 
-    <script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
